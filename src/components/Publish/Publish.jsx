@@ -1,13 +1,12 @@
 import React from 'react'
 
-
-export default class Auth extends React.Component{
+export default class Publish extends React.Component{
   constructor() {
     super()
   }
   render() {
     return (
-      <div> This is auth </div>
+      <div>This is Publish</div>
     )
   }
 }
