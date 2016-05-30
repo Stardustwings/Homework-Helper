@@ -5,16 +5,7 @@ export default class Login extends React.Component{
   constructor() {
     super()
     this.state = {username: '', password: ''}
-    this.handleUsernameChange = this.handleUsernameChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  handleUsernameChange(event) {
-    console.log('test')
-    this.setState({username: event.target.value})
-  }
-  handlePasswordChange(event) {
-    this.setState({password: event.target.value})
   }
   handleSubmit(event) {
     let username = this.usernameInput.value,

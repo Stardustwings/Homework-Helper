@@ -5,7 +5,7 @@ import {login} from './../actions/user'
 
 const mapStateToProps = (state, ownProps) => {
   const isAuthenticated = state.user.username || false
-  const redirect = ownProps.location.query.redirect || '/'
+  const redirect = ownProps.location.query.redirect || '/assignment-list'
   return {
     isAuthenticated,
     redirect
