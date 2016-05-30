@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
-import assignments from './assignments'
+import { routerReducer } from 'react-router-redux'
+import assignmentReducer from './assignmentReducer'
+import userReducer from './userReducer'
 
-const homeworkSystem = combineReducers({
-  assignments
+const indexReducer = combineReducers({
+  routing: routerReducer,
+  user: userReducer,
+  assignments: assignmentReducer
 })
 
-export default homeworkSystem
+export default indexReducer

@@ -1,16 +1,16 @@
-const assignment = (state, action) => {
-  switch (action.type) {
+const assignment = (state, {type, title, content}) => {
+  switch (type) {
     case 'ADD_ASSIGNMENT':
       return {
-        title: action.title,
-        content: action.content
+        title: title,
+        content: content
       }
     default:
       return state
   }
 }
 
-const assignments = (state = [], action) => {
+const assignmentReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_ASSIGNMENT':
       return [
@@ -22,4 +22,4 @@ const assignments = (state = [], action) => {
   }
 }
 
-export default assignments
+export default assignmentReducer

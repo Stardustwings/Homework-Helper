@@ -1,7 +1,9 @@
 import React from 'react'
-import { Router, Route, IndexRedirect, Redirect, browserHistory } from 'react-router'
+import { Router, Route, IndexRedirect, Redirect } from 'react-router'
+import { routerActions } from 'react-router-redux'
+import { UserAuthWrapper } from 'redux-auth-wrapper'
 import App from './components/App/App'
-import Login from './components/Login/Login'
+import LoginContainer from './containers/LoginContainer'
 import Register from './components/Register/Register'
 import AssignmentContainer from './containers/AssignmentContainer'
 import HomeworkList from './components/HomeworkList/HomeworkList'
@@ -9,18 +11,22 @@ import UserManagement from './components/UserManagement/UserManagement'
 import PublishContainer from './containers/PublishContainer'
 import Submit from './components/Submit/Submit'
 
-export default (
-  <Router history={browserHistory}>
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.user,
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: 'UserIsAuthenticated'
+})
+
+export default (history)=> (
+  <Router history={history}>
     <Route path='/' component={App}>
-      <Route path='login' component={Login}/>
+      <Route path='login' component={LoginContainer}/>
       <Route path='register' component={Register}/>
-      <Route path='assignment-list' component={AssignmentContainer}/>
-      <Route path='homework-list/:id' component={HomeworkList}/>
+      <Route path='assignment-list' component={UserIsAuthenticated(AssignmentContainer)}/>
+      <Route path='homework-list/:id' component={(HomeworkList)}/>
       <Route path='user-management' component={UserManagement}/>
       <Route path='publish' component={PublishContainer}/>
       <Route path='submit' component={Submit}/>
-      <IndexRedirect to='login' />
-      <Redirect from='*' to='login'/>
     </Route>
   </Router>
 )

@@ -16,8 +16,7 @@ export default class Publish extends React.Component{
    this.setState({content: event.target.value})
   }
   handleSubmit(event) {
-    let title = this.state.title.trim(),
-        content = this.state.content.trim()
+    let { title, content} = this.state
 
     event.preventDefault()
 
