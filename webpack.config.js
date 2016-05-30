@@ -43,10 +43,7 @@ module.exports = {
     new ExtractTextPlugin('[name].css')
   ],
   resolve: {
-    extensions: ['', '.jsx', '.js', '.json', '.css'],
-    root: [
-      path.resolve('./src/components')
-    ]
+    extensions: ['', '.jsx', '.js', '.json', '.css']
   },
   devtool: 'eval-source-map'
 }
