@@ -6,6 +6,7 @@ const views = require('co-views')
 const logger = require('koa-logger')
 const serve = require('koa-static')
 const bodyParser = require('koa-bodyparser')
+const jwt = require('koa-jwt')
 
 let data = {
   assignments: [
@@ -26,11 +27,13 @@ let data = {
 }
 
 const port = '8000'
+const secret = 'hs-secret'
 
 const app = koa()
 const router = new Router({
         prefix: '/data'
       })
+const loginRouter = new Router()
 const render = views('./dist', {
   map: {html: 'swig'}
 })
@@ -104,6 +107,12 @@ function * addHomework(next) {
 }
 
 function * getAllUsers(next) {
+  if (this.state.user.type !== 'teacher') {
+    this.status = 401
+    // this.body = this.state.user
+    return
+  }
+
   this.body = {users: data.users.map(user => ({username: user.username, type: user.type}))}
 }
 
@@ -111,6 +120,12 @@ function * addUser(next) {
   let username = this.request.body.username
   let password = this.request.body.password
   let type = this.request.body.type
+
+  if (this.state.user.type !== 'teacher') {
+    this.status = 401
+    // this.body = this.state.user
+    return
+  }
 
   for (let i = 0; i < data.users.length; i++) {
     if (username === data.users[i].username) {
@@ -126,7 +141,29 @@ function * addUser(next) {
   this.status = 201
 }
 
-function * login(next) {}
+function * login(next) {
+  let username = this.request.body.username
+  let password = this.request.body.password
+
+  for (let i = 0; i < data.users.length; i++) {
+    if (username === data.users[i].username) {
+      if (password === data.users[i].password) {
+        let type = data.users[i].type
+        let token = jwt.sign({username, password, type}, this.state.secret)
+
+        this.body = {token}
+        return
+      } else {
+        this.status = 401
+        this.body = 'Wrong password'
+        return
+      }
+    }
+  }
+
+  this.status = 401
+  this.body = 'Username doesn\'t exist'
+}
 
 router
   .get('/assignments', getAllAssignments)
@@ -137,16 +174,26 @@ router
   .post('/homework', addHomework)
   .get('/users', getAllUsers)
   .post('/user', addUser)
+
+loginRouter
   .post('/login', login)
 
 app.use(logger())
 app.use(serve('./dist'))
 app.use(bodyParser())
 
+app.use(jwt({ secret: secret }).unless({ path: [/^\/login/] }))
+app.use(function * (next){
+  this.state.secret = secret
+  yield next
+})
+
 app
   .use(router.routes())
-  .use(router.allowedMethods())
+  .use(loginRouter.routes())
   .use(fallback)
+  .use(router.allowedMethods())
+  .use(loginRouter.allowedMethods())
 
 app.listen(port)
 console.log(`listening on port ${port}`)
