@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Router from './Router'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
@@ -13,7 +14,7 @@ const routingMiddleware = routerMiddleware(browserHistory)
 
 const store = createStore(
   indexReducer, data, compose(
-    applyMiddleware(routingMiddleware),
+    applyMiddleware(routingMiddleware, thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 )
