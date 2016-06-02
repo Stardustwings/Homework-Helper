@@ -1,12 +1,12 @@
-export function login(payload) {
+export function loginSuccess(user) {
   return {
-    type: 'USER_LOGGED_IN',
-    payload
+    type: 'LOGGED_IN_SUCCESS',
+    user
   }
 }
 
-export function logout() {
+export function logoutSuccess() {
   return {
-    type: 'USER_LOGGED_OUT'
+    type: 'LOGGED_OUT_SUCCESS'
   }
 }

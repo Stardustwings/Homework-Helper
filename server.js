@@ -31,9 +31,8 @@ const secret = 'hs-secret'
 
 const app = koa()
 const router = new Router({
-        prefix: '/data'
+        prefix: '/api'
       })
-const loginRouter = new Router()
 const render = views('./dist', {
   map: {html: 'swig'}
 })
@@ -145,11 +144,13 @@ function * login(next) {
   let username = this.request.body.username
   let password = this.request.body.password
 
+  // console.log(`${username} ${password}`)
+
   for (let i = 0; i < data.users.length; i++) {
     if (username === data.users[i].username) {
       if (password === data.users[i].password) {
         let type = data.users[i].type
-        let token = jwt.sign({username, password, type}, this.state.secret)
+        let token = jwt.sign({username, type}, this.state.secret)
 
         this.body = {token}
         return
@@ -174,15 +175,14 @@ router
   .post('/homework', addHomework)
   .get('/users', getAllUsers)
   .post('/user', addUser)
-
-loginRouter
   .post('/login', login)
 
 app.use(logger())
+
 app.use(serve('./dist'))
 app.use(bodyParser())
 
-app.use(jwt({ secret: secret }).unless({ path: [/^\/login/] }))
+app.use(jwt({ secret: secret }).unless({ path: [/^\/api\/login/] }))
 app.use(function * (next){
   this.state.secret = secret
   yield next
@@ -190,10 +190,8 @@ app.use(function * (next){
 
 app
   .use(router.routes())
-  .use(loginRouter.routes())
-  .use(fallback)
   .use(router.allowedMethods())
-  .use(loginRouter.allowedMethods())
+  .use(fallback)
 
 app.listen(port)
 console.log(`listening on port ${port}`)

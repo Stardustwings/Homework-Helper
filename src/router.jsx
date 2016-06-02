@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, Route, IndexRedirect, Redirect } from 'react-router'
 import { routerActions } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
-import App from './components/App/App'
+import AppContainer from './containers/AppContainer'
 import LoginContainer from './containers/LoginContainer'
 import Register from './components/Register/Register'
 import AssignmentContainer from './containers/AssignmentContainer'
@@ -19,7 +19,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 
 export default (history)=> (
   <Router history={history}>
-    <Route path='/' component={App}>
+    <Route path='/' component={AppContainer}>
       <Route path='login' component={LoginContainer}/>
       <Route path='register' component={Register}/>
       <Route path='assignment-list' component={UserIsAuthenticated(AssignmentContainer)}/>

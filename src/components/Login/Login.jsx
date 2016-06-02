@@ -26,6 +26,8 @@ export default class Login extends React.Component{
     const { isAuthenticated, replace, redirect } = props
 
     if (isAuthenticated) {
+      console.log(redirect)
+
       replace(redirect)
     }
   }
