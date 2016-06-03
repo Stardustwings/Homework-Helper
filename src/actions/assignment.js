@@ -1,8 +1,36 @@
-export const addAssignment = (title, content) => {
+export const addAssignmentRequest = ({title, content, token}) => {
+  return (dispatch) => {
+    dispatch(addAssignmentSuccess({title, content}))
+
+    fetch('api/assignment', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${token}`
+      },
+      body: `title=${title}&content=${content}`
+    })
+    .then(response => {
+      if (response.status < 200 || response.status >= 300) {
+        dispatch(addAssignmentFailure(title))
+      }
+    })
+  }
+}
+
+export const addAssignmentSuccess = ({title, content}) => {
   return {
-    type: 'ADD_ASSIGNMENT',
+    type: 'ADD_ASSIGNMENT_SUCCESS',
     title,
     content
+  }
+}
+
+export const addAssignmentFailure = ({title, content}) => {
+  return {
+    type: 'ADD_ASSIGNMENT_FAILURE',
+    title
   }
 }
 
@@ -11,6 +39,7 @@ export const getAssignmentsRequest = (token) => {
     fetch('api/assignments', {
       method: 'GET',
       headers: {
+        Accept: 'application/json',
         Authorization: `Bearer ${token}`
       }
     })

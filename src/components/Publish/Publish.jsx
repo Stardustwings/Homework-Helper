@@ -4,24 +4,21 @@ import {Link} from 'react-router'
 export default class Publish extends React.Component{
   constructor() {
     super()
-    this.state = {title: '', content: ''}
-    this.handleTitleChange = this.handleTitleChange.bind(this)
-    this.handleContentChange = this.handleContentChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleTitleChange(event) {
-   this.setState({title: event.target.value})
-  }
-  handleContentChange(event) {
-   this.setState({content: event.target.value})
-  }
   handleSubmit(event) {
-    let { title, content} = this.state
+    let title = this.titleInput.value,
+        content = this.contentInput.value,
+        token = localStorage.getItem('token')
 
     event.preventDefault()
 
-    this.setState({title: '', content: ''})
-    this.props.addAssignment(title, content)
+    if (token) {
+      this.props.addAssignment({title, content, token})
+    }
+
+    this.titleInput.value = ''
+    this.contentInput.value = ''
   }
   render() {
     return (
@@ -31,9 +28,8 @@ export default class Publish extends React.Component{
             <input
               type='text'
               name='title'
-              value={this.state.title}
+              ref={(input) => this.titleInput = input}
               placeholder='标题'
-              onChange={this.handleTitleChange}
               required
             />
           </div>
@@ -41,9 +37,8 @@ export default class Publish extends React.Component{
             <textarea
               type='text'
               name='content'
-              value={this.state.content}
+              ref={(input) => this.contentInput = input}
               placeholder='具体要求'
-              onChange={this.handleContentChange}
               required
             />
           </div>
