@@ -18,7 +18,7 @@ const assignmentReducer = (state = [], action) => {
       return action.assignments
     case 'GET_ASSIGNMENT_SUCCESS':
       return [
-        ...state,
+        ...state.filter(assignment => assignment.title !== action.title),
         action.assignment
       ]
     default:

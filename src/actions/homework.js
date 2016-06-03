@@ -57,3 +57,34 @@ export const getHomeworksSuccess = (homeworks) => {
     homeworks
   }
 }
+
+export const getHomeworkRequest = ({assignment, author, token}) => {
+  return (dispatch) => {
+    fetch(`/api/homework/${assignment}&${author}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      // console.log(response.json())
+
+      if (response.status >= 200 && response.status < 300) {
+        return response.json()
+      }
+    })
+    .then(response => {
+      let homework = response.homework
+
+      dispatch(getHomeworkSuccess(homework))
+    })
+  }
+}
+
+export const getHomeworkSuccess = (homework) => {
+  return {
+    type: 'GET_HOMEWORK_SUCCESS',
+    homework
+  }
+}

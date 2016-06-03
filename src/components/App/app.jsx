@@ -1,6 +1,5 @@
 import React from 'react'
 import HeaderContainer from './../../containers/HeaderContainer'
-import Footer from './../Footer/Footer'
 import jwtDecode from 'jwt-decode'
 
 export default class App extends React.Component{
@@ -21,7 +20,6 @@ export default class App extends React.Component{
       <div>
         <HeaderContainer />
         {this.props.children}
-        <Footer />
       </div>
     )
   }

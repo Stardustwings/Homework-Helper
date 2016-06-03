@@ -16,6 +16,11 @@ const homeworkReducer = (state = [], action) => {
       ]
     case 'GET_HOMEWORKS_SUCCESS':
       return action.homeworks
+      case 'GET_HOMEWORK_SUCCESS':
+      return [
+        ...state.filter(homework => (homework.assignment !== action.assignment && homework.author !== action.author)),
+        action.homework
+      ]
     default:
       return state
   }
