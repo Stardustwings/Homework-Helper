@@ -1,7 +1,5 @@
 export const addAssignmentRequest = ({title, content, token}) => {
   return (dispatch) => {
-    dispatch(addAssignmentSuccess({title, content}))
-
     fetch('/api/assignment', {
       method: 'POST',
       headers: {
@@ -13,7 +11,7 @@ export const addAssignmentRequest = ({title, content, token}) => {
     })
     .then(response => {
       if (response.status < 200 || response.status >= 300) {
-        dispatch(addAssignmentFailure(title))
+        dispatch(addAssignmentSuccess({title, content}))
       }
     })
   }
@@ -24,13 +22,6 @@ export const addAssignmentSuccess = ({title, content}) => {
     type: 'ADD_ASSIGNMENT_SUCCESS',
     title,
     content
-  }
-}
-
-export const addAssignmentFailure = ({title, content}) => {
-  return {
-    type: 'ADD_ASSIGNMENT_FAILURE',
-    title
   }
 }
 
