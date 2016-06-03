@@ -1,7 +1,5 @@
 export const addHomeworkRequest = ({assignment, author, title, content, token}) => {
   return (dispatch) => {
-    dispatch(addHomeworkSuccess({assignment, author, title, content}))
-
     fetch('/api/homework', {
       method: 'POST',
       headers: {
@@ -13,7 +11,7 @@ export const addHomeworkRequest = ({assignment, author, title, content, token}) 
     })
     .then(response => {
       if (response.status < 200 || response.status >= 300) {
-        dispatch(addHomeworkFailure(assignment, author))
+        dispatch(addHomeworkSuccess({assignment, author, title, content}))
       }
     })
   }
@@ -26,13 +24,6 @@ export const addHomeworkSuccess = ({assignment, author, title, content}) => {
     author,
     title,
     content
-  }
-}
-
-export const addHomeworkFailure = ({assignment}) => {
-  return {
-    type: 'ADD_HOMEWORK_FAILURE',
-    assignment
   }
 }
 

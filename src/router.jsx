@@ -9,7 +9,7 @@ import AssignmentDetailContainer from './containers/AssignmentDetailContainer'
 import HomeworkList from './components/HomeworkList/HomeworkList'
 import UserManagement from './components/UserManagement/UserManagement'
 import PublishContainer from './containers/PublishContainer'
-import Submit from './components/Submit/Submit'
+import SubmitContainer from './containers/SubmitContainer'
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.user,
@@ -26,7 +26,7 @@ export default (history)=> (
       <Route path='homework-list/:id' component={(HomeworkList)}/>
       <Route path='user-management' component={UserManagement}/>
       <Route path='publish' component={PublishContainer}/>
-      <Route path='submit' component={Submit}/>
+      <Route path='submit/:id' component={SubmitContainer}/>
     </Route>
   </Router>
 )

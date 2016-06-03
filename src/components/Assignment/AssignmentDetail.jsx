@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 import HomeworkItem from './HomeworkItem'
 
 export default class AssignmentDetail extends React.Component {
@@ -38,6 +39,7 @@ export default class AssignmentDetail extends React.Component {
               : <div>The homework-list is empty</div>
           )}
         </div>
+        <Link to={`/submit/${this.props.title}`}>submit</Link>
       </div>
     )
   }

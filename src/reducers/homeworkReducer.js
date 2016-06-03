@@ -11,11 +11,9 @@ const homeworkReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_HOMEWORK_SUCCESS':
       return [
-        ...state,
+        ...state.filter(homework => (homework.assignment !== action.assignment && homework.author !== action.author)),
         homework(undefined, action)
       ]
-    case 'ADD_HOMEWORK_FAILURE':
-      return state.filter(homework => (homework.assignment !== action.assignment && homework.author !== action.author))
     case 'GET_HOMEWORKS_SUCCESS':
       return action.homeworks
     default:
