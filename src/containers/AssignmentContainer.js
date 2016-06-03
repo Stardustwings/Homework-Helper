@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import AssignmentList from './../components/Assignment/AssignmentList'
-
+import {getAssignmentsRequest} from './../actions/assignment'
 
 const mapStateToProps = (state) => {
   return {
@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
 }
 
 const AssignmentContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  {getAssignments: getAssignmentsRequest}
 )(AssignmentList)
 
 export default AssignmentContainer

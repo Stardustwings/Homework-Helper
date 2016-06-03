@@ -17,6 +17,8 @@ const assignmentReducer = (state = [], action) => {
         ...state,
         assignment(undefined, action)
       ]
+    case 'GET_ASSIGNMENTS_SUCCESS':
+      return action.assignments
     default:
       return state
   }

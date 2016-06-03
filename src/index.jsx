@@ -8,7 +8,11 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { browserHistory } from 'react-router'
 import indexReducer from './reducers/index'
-import data from './data'
+// import data from './data'
+
+const data = {
+  assignments: []
+}
 
 const routingMiddleware = routerMiddleware(browserHistory)
 
