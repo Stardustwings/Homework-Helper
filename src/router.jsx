@@ -4,8 +4,8 @@ import { routerActions } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import AppContainer from './containers/AppContainer'
 import LoginContainer from './containers/LoginContainer'
-import Register from './components/Register/Register'
 import AssignmentContainer from './containers/AssignmentContainer'
+import AssignmentDetailContainer from './containers/AssignmentDetailContainer'
 import HomeworkList from './components/HomeworkList/HomeworkList'
 import UserManagement from './components/UserManagement/UserManagement'
 import PublishContainer from './containers/PublishContainer'
@@ -21,8 +21,8 @@ export default (history)=> (
   <Router history={history}>
     <Route path='/' component={AppContainer}>
       <Route path='login' component={LoginContainer}/>
-      <Route path='register' component={Register}/>
       <Route path='assignment-list' component={UserIsAuthenticated(AssignmentContainer)}/>
+      <Route path='assignment-detail/:id' component={(AssignmentDetailContainer)}/>
       <Route path='homework-list/:id' component={(HomeworkList)}/>
       <Route path='user-management' component={UserManagement}/>
       <Route path='publish' component={PublishContainer}/>

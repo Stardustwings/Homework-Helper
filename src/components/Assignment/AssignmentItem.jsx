@@ -1,8 +1,9 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 const AssignmentItem = ({title}) => (
   <li>
-    {title}
+    <Link to={`assignment-detail/${title}`}>{title}</Link>
   </li>
 )
 

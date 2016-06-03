@@ -2,7 +2,7 @@ export const addAssignmentRequest = ({title, content, token}) => {
   return (dispatch) => {
     dispatch(addAssignmentSuccess({title, content}))
 
-    fetch('api/assignment', {
+    fetch('/api/assignment', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -36,7 +36,7 @@ export const addAssignmentFailure = ({title, content}) => {
 
 export const getAssignmentsRequest = (token) => {
   return (dispatch) => {
-    fetch('api/assignments', {
+    fetch('/api/assignments', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -64,3 +64,35 @@ export const getAssignmentsSuccess = (assignments) => {
     assignments
   }
 }
+
+export const getAssignmentRequest = ({title, token}) => {
+  return (dispatch) => {
+    fetch(`/api/assignment/${title}`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      // console.log(response.json())
+
+      if (response.status >= 200 && response.status < 300) {
+        return response.json()
+      }
+    })
+    .then(response => {
+      let assignment = response.assignment
+
+      dispatch(getAssignmentSuccess(assignment))
+    })
+  }
+}
+
+export const getAssignmentSuccess = (assignment) => {
+  return {
+    type: 'GET_ASSIGNMENT_SUCCESS',
+    assignment
+  }
+}
+

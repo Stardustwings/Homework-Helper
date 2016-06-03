@@ -10,14 +10,15 @@ import { browserHistory } from 'react-router'
 import indexReducer from './reducers/index'
 // import data from './data'
 
-const data = {
-  assignments: []
+const initialState = {
+  assignments: [],
+  homeworks: []
 }
 
 const routingMiddleware = routerMiddleware(browserHistory)
 
 const store = createStore(
-  indexReducer, data, compose(
+  indexReducer, initialState, compose(
     applyMiddleware(routingMiddleware, thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )

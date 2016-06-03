@@ -15,9 +15,8 @@ let data = {
     {title: 'thirdAssignment', content: 'thirdAssignment'},
   ],
   homeworks: [
-    {title: 'firstHomework', content: 'firstHomework', author: 'stu1', assignment: 'firstAssignment'},
-    {title: 'secondHomework', content: 'secondHomework', author: 'stu1', assignment: 'firstAssignment'},
-    {title: 'thirdHomework', content: 'thirdHomework', author: 'stu1', assignment: 'firstAssignment'}
+    {title: 'firstHomework', content: 'firstHomework', author: 'ta1', assignment: 'firstAssignment'},
+    {title: 'secondHomework', content: 'secondHomework', author: 'stu1', assignment: 'firstAssignment'}
   ],
   users: [
     {username: 'admin', password: 'admin', type: 'teacher'},
