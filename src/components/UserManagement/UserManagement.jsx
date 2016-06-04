@@ -1,12 +1,22 @@
 import React from 'react'
+import AddUserArea from './AddUserArea'
+import UserList from './UserList'
 
 export default class UserManagement extends React.Component{
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+
+    // console.log(this.props)
   }
   render() {
     return (
-      <div>This is UserManagement</div>
+      <div>
+        <AddUserArea addUser={this.props.addUser}/>
+        <UserList
+          getUsers={this.props.getUsers}
+          users={this.props.users}
+        />
+      </div>
     )
   }
 }

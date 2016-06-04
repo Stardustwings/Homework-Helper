@@ -7,7 +7,7 @@ import LoginContainer from './containers/LoginContainer'
 import AssignmentContainer from './containers/AssignmentContainer'
 import AssignmentDetailContainer from './containers/AssignmentDetailContainer'
 import HomeworkDetailContainer from './containers/HomeworkDetailContainer'
-import UserManagement from './components/UserManagement/UserManagement'
+import UserManagementContainer from './containers/UserManagementContainer'
 import PublishContainer from './containers/PublishContainer'
 import SubmitContainer from './containers/SubmitContainer'
 
@@ -24,7 +24,7 @@ export default (history)=> (
       <Route path='assignment-list' component={UserIsAuthenticated(AssignmentContainer)}/>
       <Route path='assignment-detail/:id' component={(AssignmentDetailContainer)}/>
       <Route path='homework-detail/:id' component={(HomeworkDetailContainer)}/>
-      <Route path='user-management' component={UserManagement}/>
+      <Route path='user-management' component={UserManagementContainer}/>
       <Route path='publish' component={PublishContainer}/>
       <Route path='submit/:id' component={SubmitContainer}/>
     </Route>

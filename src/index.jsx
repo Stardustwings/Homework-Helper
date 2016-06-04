@@ -11,6 +11,7 @@ import indexReducer from './reducers/index'
 // import data from './data'
 
 const initialState = {
+  users: [],
   assignments: [],
   homeworks: []
 }

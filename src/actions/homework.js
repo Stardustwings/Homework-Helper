@@ -10,7 +10,7 @@ export const addHomeworkRequest = ({assignment, author, title, content, token}) 
       body: `assignment=${assignment}&author=${author}&title=${title}&content=${content}`
     })
     .then(response => {
-      if (response.status < 200 || response.status >= 300) {
+      if (response.status >= 200 || response.status < 300) {
         dispatch(addHomeworkSuccess({assignment, author, title, content}))
       }
     })

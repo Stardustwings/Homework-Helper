@@ -10,7 +10,7 @@ export const addAssignmentRequest = ({title, content, token}) => {
       body: `title=${title}&content=${content}`
     })
     .then(response => {
-      if (response.status < 200 || response.status >= 300) {
+      if (response.status >= 200 || response.status < 300) {
         dispatch(addAssignmentSuccess({title, content}))
       }
     })

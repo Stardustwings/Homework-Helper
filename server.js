@@ -134,7 +134,7 @@ function * addUser(next) {
 
   data.users.push({username, password, type})
 
-  this.body = {users: data.users}
+  // this.body = {users: data.users}
 
   this.status = 201
 }
