@@ -17,16 +17,25 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated'
 })
 
+const UserIsAdmin = UserAuthWrapper({
+  authSelector: state => state.user,
+  redirectAction: routerActions.replace,
+  failureRedirectPath: '/assignment-list',
+  wrapperDisplayName: 'UserIsAdmin',
+  predicate: user => user.type === 'teacher',
+  allowRedirectBack: false
+})
+
 export default (history)=> (
   <Router history={history}>
     <Route path='/' component={AppContainer}>
       <Route path='login' component={LoginContainer}/>
       <Route path='assignment-list' component={UserIsAuthenticated(AssignmentContainer)}/>
-      <Route path='assignment-detail/:id' component={(AssignmentDetailContainer)}/>
-      <Route path='homework-detail/:id' component={(HomeworkDetailContainer)}/>
-      <Route path='user-management' component={UserManagementContainer}/>
-      <Route path='publish' component={PublishContainer}/>
-      <Route path='submit/:id' component={SubmitContainer}/>
+      <Route path='assignment-detail/:id' component={UserIsAuthenticated(AssignmentDetailContainer)}/>
+      <Route path='homework-detail/:id' component={UserIsAuthenticated(HomeworkDetailContainer)}/>
+      <Route path='user-management' component={UserIsAuthenticated(UserIsAdmin(UserManagementContainer))}/>
+      <Route path='publish' component={UserIsAuthenticated(UserIsAdmin(PublishContainer))}/>
+      <Route path='submit/:id' component={UserIsAuthenticated(SubmitContainer)}/>
     </Route>
   </Router>
 )

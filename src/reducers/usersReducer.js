@@ -16,6 +16,8 @@ const usersReducer = (state = {}, action) => {
         ...state.filter(user => user.username !== action.username),
         user(undefined, action)
       ]
+    case 'LOGGED_OUT_SUCCESS':
+      return []
     default:
       return state
   }

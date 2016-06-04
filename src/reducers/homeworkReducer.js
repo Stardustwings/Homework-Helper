@@ -21,6 +21,8 @@ const homeworkReducer = (state = [], action) => {
         ...state.filter(homework => (homework.assignment !== action.assignment && homework.author !== action.author)),
         action.homework
       ]
+    case 'LOGGED_OUT_SUCCESS':
+      return []
     default:
       return state
   }

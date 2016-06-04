@@ -21,6 +21,8 @@ const assignmentReducer = (state = [], action) => {
         ...state.filter(assignment => assignment.title !== action.title),
         action.assignment
       ]
+    case 'LOGGED_OUT_SUCCESS':
+      return []
     default:
       return state
   }
