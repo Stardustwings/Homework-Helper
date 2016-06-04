@@ -41,7 +41,7 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Homework System'
+      title: 'Homework Helper'
     }),
     new ExtractTextPlugin('[name].css')
   ],

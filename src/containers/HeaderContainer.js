@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { logoutSuccess } from './../actions/user'
+import { routerActions } from 'react-router-redux'
 import Header from './../components/Header/Header'
 
 const mapStateToProps = (state) => {
@@ -13,7 +14,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     logout: () => {
       localStorage.removeItem('token')
       dispatch(logoutSuccess())
-    }
+    },
+    replace: (url) => dispatch(routerActions.replace(url))
   }
 }
 

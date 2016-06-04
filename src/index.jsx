@@ -8,7 +8,13 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { browserHistory } from 'react-router'
 import indexReducer from './reducers/index'
-// import data from './data'
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+
+import './global'
+
+injectTapEventPlugin()
 
 const initialState = {
   users: [],
@@ -30,7 +36,9 @@ const history = syncHistoryWithStore(browserHistory, store)
 const root = document.createElement('div')
 document.body.appendChild(root)
 ReactDOM.render(
-  <Provider store={store}>
-    {Router(history)}
-  </Provider>,
+  <MuiThemeProvider muiTheme={getMuiTheme()}>
+    <Provider store={store}>
+      {Router(history)}
+    </Provider>
+  </MuiThemeProvider>,
 root)
