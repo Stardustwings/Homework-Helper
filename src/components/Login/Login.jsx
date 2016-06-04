@@ -1,5 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 export default class Login extends React.Component{
   constructor() {
@@ -8,8 +11,10 @@ export default class Login extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(event) {
-    let username = this.usernameInput.value,
-        password = this.passwordInput.value
+    let username = this.usernameInput.getValue(),
+        password = this.passwordInput.getValue()
+
+    console.log(`${username} ${password}`)
 
     event.preventDefault()
 
@@ -32,28 +37,41 @@ export default class Login extends React.Component{
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type='text'
-              name='username'
-              ref={(input) => this.usernameInput = input}
-              placeholder='请输入用户名'
-              required
-            />
-          </div>
-          <div>
-            <input
-              type='password'
-              name='password'
-              ref={(input) => this.passwordInput = input}
-              placeholder='请输入密码'
-              required
-            />
-          </div>
-          <button type='submit'>登陆</button>
-        </form>
-        <Link to='register'>register</Link>
+        <Card
+          style={{
+            'max-width': '400px',
+            margin: 'auto',
+            'margin-top': '40px',
+            'text-align': 'center'
+          }}
+        >
+          <CardTitle title='Welcome'  />
+          <CardText>
+            <form onSubmit={this.handleSubmit}>
+              <TextField
+                hintText='Username Field'
+                floatingLabelText='Username'
+                ref={(input) => this.usernameInput = input}
+                required
+              /><br />
+              <TextField
+                hintText='password Field'
+                floatingLabelText='password'
+                type='password'
+                ref={(input) => this.passwordInput = input}
+                required
+              /><br />
+              <RaisedButton
+                label='Login'
+                primary={true}
+                type='submit'
+                style={{
+                  margin: '18px'
+                }}
+              />
+            </form>
+          </CardText>
+        </Card>
       </div>
     )
   }

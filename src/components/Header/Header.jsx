@@ -60,8 +60,15 @@ export default class Header extends React.Component{
           </MenuItem>
           <Divider />
           <MenuItem onTouchTap={this.goTo('/assignment-list')}>assignment-list</MenuItem>
-          <MenuItem onTouchTap={this.goTo('/publish')}>publish</MenuItem>
-          <MenuItem onTouchTap={this.goTo('/user-management')}>user-management</MenuItem>
+
+          {this.props.user.type === 'teacher'
+          ? (<MenuItem onTouchTap={this.goTo('/publish')}>publish</MenuItem>)
+          : null
+          }
+          {this.props.user.type === 'teacher'
+          ? (<MenuItem onTouchTap={this.goTo('/user-management')}>user-management</MenuItem>)
+          : null
+          }
           <Divider />
           <MenuItem
             onTouchTap={this.handleLogout}
