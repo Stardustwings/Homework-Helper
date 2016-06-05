@@ -30,7 +30,7 @@ class AssignmentList extends React.Component {
           maxWidth: '800px'
         }}
       >
-        <CardTitle title='User List'  />
+        <CardTitle title='Assignment List'  />
         <CardText
           style={{
             marginTop: '-20px'

@@ -1,6 +1,6 @@
 const homework = (state, {type, assignment, author, title, content}) => {
   switch (type) {
-    case 'ADD_ASSIGNMENT_SUCCESS':
+    case 'ADD_HOMEWORK_SUCCESS':
       return { assignment, author, title, content }
     default:
       return state
