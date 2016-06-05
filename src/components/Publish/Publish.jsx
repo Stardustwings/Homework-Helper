@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, CardTitle, CardText} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import moment from 'moment'
 
 export default class Publish extends React.Component{
   constructor() {
@@ -11,6 +12,8 @@ export default class Publish extends React.Component{
   handleSubmit(event) {
     let title = this.titleInput.getValue(),
         content = this.contentInput.getValue(),
+        publisher = this.props.user.username,
+        date = moment().format('MMMM Do YYYY'),
         token = localStorage.getItem('token')
 
     event.preventDefault()
@@ -18,7 +21,7 @@ export default class Publish extends React.Component{
     console.log(`${title} ${content}`)
 
     if (token) {
-      this.props.addAssignment({title, content, token})
+      this.props.addAssignment({title, content, publisher, date, token})
     }
 
     this.titleInput.input.value = ''

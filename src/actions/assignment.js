@@ -1,4 +1,4 @@
-export const addAssignmentRequest = ({title, content, token}) => {
+export const addAssignmentRequest = ({title, content, publisher, date, token}) => {
   return (dispatch) => {
     fetch('/api/assignment', {
       method: 'POST',
@@ -7,11 +7,11 @@ export const addAssignmentRequest = ({title, content, token}) => {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Bearer ${token}`
       },
-      body: `title=${title}&content=${content}`
+      body: `title=${title}&content=${content}&publisher=${publisher}&date=${date}`
     })
     .then(response => {
       if (response.status >= 200 || response.status < 300) {
-        dispatch(addAssignmentSuccess({title, content}))
+        dispatch(addAssignmentSuccess({title, content, publisher, date}))
       }
     })
   }
@@ -21,7 +21,9 @@ export const addAssignmentSuccess = ({title, content}) => {
   return {
     type: 'ADD_ASSIGNMENT_SUCCESS',
     title,
-    content
+    content,
+    publisher,
+    date
   }
 }
 

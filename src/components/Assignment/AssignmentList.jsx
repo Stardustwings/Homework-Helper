@@ -63,8 +63,8 @@ class AssignmentList extends React.Component {
                   >
                     {assignment.title}
                   </TableRowColumn>
-                  <TableRowColumn>publisher</TableRowColumn>
-                  <TableRowColumn>date</TableRowColumn>
+                  <TableRowColumn>{assignment.publisher}</TableRowColumn>
+                  <TableRowColumn>{assignment.date}</TableRowColumn>
                 </TableRow>
               )}
             </TableBody>

@@ -10,9 +10,9 @@ const jwt = require('koa-jwt')
 
 let data = {
   assignments: [
-    {title: 'firstAssignment', content: 'firstAssignment'},
-    {title: 'secondAssignment', content: 'secondAssignment'},
-    {title: 'thirdAssignment', content: 'thirdAssignment'},
+    {title: 'firstAssignment', content: 'firstAssignment', publisher: 'admin', date: 'June 1st 2016'},
+    {title: 'secondAssignment', content: 'secondAssignment', publisher: 'admin', date: 'June 2nd 2016'},
+    {title: 'thirdAssignment', content: 'thirdAssignment', publisher: 'admin', date: 'June 3rd 2016'},
   ],
   homeworks: [
     {title: 'firstHomework', content: 'firstHomework', author: 'ta1', assignment: 'firstAssignment'},
@@ -55,6 +55,8 @@ function * getAssignment(next) {
 function * addAssignment(next) {
   let title = this.request.body.title
   let content = this.request.body.content
+  let publisher = this.request.body.publisher
+  let date = this.request.body.date
 
   for (let i = 0; i < data.assignments.length; i++) {
     if (title === data.assignments[i].title) {
@@ -63,7 +65,7 @@ function * addAssignment(next) {
     }
   }
 
-  data.assignments.push({title, content})
+  data.assignments.push({title, content, publisher, date})
 
   // this.body = {assignments: data.assignments}
 

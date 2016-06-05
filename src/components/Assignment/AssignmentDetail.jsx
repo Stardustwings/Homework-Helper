@@ -49,7 +49,7 @@ export default class AssignmentDetail extends React.Component {
             textAlign: 'center'
           }}
         >
-          <CardTitle title={this.props.title} subtitle={`admin 2016-4-1`}/>
+          <CardTitle title={this.props.title} subtitle={`${this.props.publisher} - ${this.props.date}`}/>
           <CardText>
             {this.props.content}
           </CardText>

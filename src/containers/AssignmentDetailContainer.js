@@ -9,7 +9,9 @@ function getAssignmentByTitle({title, state}) {
 
   for (let i = 0; i < assignments.length; i++) {
     if (assignments[i].title === title) {
-      return assignments[i].content
+      let {content, publisher, date} = assignments[i]
+
+      return {content, publisher, date}
     }
   }
 
@@ -17,11 +19,15 @@ function getAssignmentByTitle({title, state}) {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  let {content, publisher, date} = getAssignmentByTitle({title: ownProps.params.id, state})
+
   return {
     // homeworks: [1,2,3,4,5,6,7,8].map(a=>({assignment: a, author: a, title: a, content: a})),
     homeworks: state.homeworks,
     title: ownProps.params.id,
-    content: getAssignmentByTitle({title: ownProps.params.id, state})
+    content,
+    publisher,
+    date
   }
 }
 
