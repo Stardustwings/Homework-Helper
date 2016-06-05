@@ -1,5 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 export default class Publish extends React.Component{
   constructor() {
@@ -7,46 +9,64 @@ export default class Publish extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(event) {
-    let title = this.titleInput.value,
-        content = this.contentInput.value,
+    let title = this.titleInput.getValue(),
+        content = this.contentInput.getValue(),
         token = localStorage.getItem('token')
 
     event.preventDefault()
+
+    console.log(`${title} ${content}`)
 
     if (token) {
       this.props.addAssignment({title, content, token})
     }
 
-    this.titleInput.value = ''
-    this.contentInput.value = ''
+    this.titleInput.input.value = ''
+    this.contentInput.input.value = ''
+
+    this.props.replace('/assignment-list')
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type='text'
-              name='title'
+      <Card
+        style={{
+          maxWidth: '400px',
+          margin: 'auto',
+          marginTop: '40px',
+          textAlign: 'center'
+        }}
+      >
+        <CardTitle title='Publish Assignment'  />
+        <CardText>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              hintText='Title Field'
+              floatingLabelText='Title'
               ref={(input) => this.titleInput = input}
-              placeholder='标题'
               required
-            />
-          </div>
-          <div>
-            <textarea
-              type='text'
-              name='content'
+            /><br />
+            <TextField
+              hintText='Content Field'
+              floatingLabelText='Content'
+              multiLine={true}
+              rows={3}
               ref={(input) => this.contentInput = input}
-              placeholder='具体要求'
               required
+              style={{
+                textAlign: 'left'
+              }}
+            /><br />
+            <RaisedButton
+              label='Publish'
+              primary={true}
+              type='submit'
+              style={{
+                margin: '18px'
+              }}
             />
-          </div>
-          <button type='submit'>发布</button>
-        </form>
-
-        <Link to='assignment-list'>assignment-list</Link>
-      </div>
+          </form>
+        </CardText>
+      </Card>
     )
   }
 }

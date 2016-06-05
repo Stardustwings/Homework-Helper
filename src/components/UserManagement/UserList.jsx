@@ -1,5 +1,4 @@
 import React from 'react'
-import UserItem from './UserItem'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 
 export default class UserList extends React.Component {
