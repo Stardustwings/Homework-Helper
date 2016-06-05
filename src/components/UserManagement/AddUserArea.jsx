@@ -68,6 +68,9 @@ export default class AddUserArea extends React.Component{
               value={this.state.type}
               onChange={this.handleTypeChange}
               ref={(input) => this.typeInput = input}
+              style={{
+                marginTop: '16px'
+              }}
             >
               <MenuItem value='student' primaryText="Student" />
               <MenuItem value='ta' primaryText="Ta" />
@@ -79,7 +82,7 @@ export default class AddUserArea extends React.Component{
               primary={true}
               type='submit'
               style={{
-                margin: '18px'
+                margin: '28px'
               }}
             />
           </form>

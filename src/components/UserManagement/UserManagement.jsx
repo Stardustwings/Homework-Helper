@@ -14,7 +14,7 @@ export default class UserManagement extends React.Component{
         style={{
           display: 'flex',
           justifyContent: 'space-around',
-          marginTop: '40px'
+          height: '430px'
         }}
       >
         <AddUserArea addUser={this.props.addUser}/>

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
 
 export default class UserList extends React.Component {
   constructor(props) {
@@ -17,44 +18,48 @@ export default class UserList extends React.Component {
 
   render() {
     return (
-      <div style={{
-        verticalAlign: 'top',
-        marginTop: '40px',
-        width: '38%',
-        minWidth: '300px',
-        maxWidth: '500px'
-      }}>
-        {(this.props.users.length > 0
-            ? (
-              <Table
-                selectable={false}
-                height='310px'
-              >
-                <TableHeader
-                  displaySelectAll={false}
-                  adjustForCheckbox={false}
-                >
-                  <TableRow>
-                    <TableHeaderColumn>Username</TableHeaderColumn>
-                    <TableHeaderColumn>Type</TableHeaderColumn>
-                  </TableRow>
-                </TableHeader>
-                <TableBody
-                  displayRowCheckbox={false}
-                  showRowHover={true}
-                >
-                  {this.props.users.map(user =>
-                    <TableRow key={user.username}>
-                      <TableRowColumn>{user.username}</TableRowColumn>
-                      <TableRowColumn>{user.type}</TableRowColumn>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            )
-            : <div>The user-list is empty</div>
-        )}
-      </div>
+      <Card
+        style={{
+          verticalAlign: 'top',
+          marginTop: '40px',
+          width: '40%',
+          minWidth: '320px',
+          maxWidth: '520px'
+        }}
+      >
+        <CardTitle title='User List'  />
+        <CardText
+          style={{
+            marginTop: '-20px'
+          }}
+        >
+          <Table
+            selectable={false}
+            height='250px'
+          >
+            <TableHeader
+              displaySelectAll={false}
+              adjustForCheckbox={false}
+            >
+              <TableRow>
+                <TableHeaderColumn>Username</TableHeaderColumn>
+                <TableHeaderColumn>Type</TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody
+              displayRowCheckbox={false}
+              showRowHover={true}
+            >
+              {this.props.users.map(user =>
+                <TableRow key={user.username}>
+                  <TableRowColumn>{user.username}</TableRowColumn>
+                  <TableRowColumn>{user.type}</TableRowColumn>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardText>
+      </Card>
     )
   }
 
