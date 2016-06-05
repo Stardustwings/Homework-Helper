@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router'
 import {Card, CardTitle, CardText} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -39,10 +38,10 @@ export default class Login extends React.Component{
       <div>
         <Card
           style={{
-            'max-width': '400px',
+            maxWidth: '400px',
             margin: 'auto',
-            'margin-top': '40px',
-            'text-align': 'center'
+            marginTop: '40px',
+            textAlign: 'center'
           }}
         >
           <CardTitle title='Welcome'  />

@@ -1,15 +1,28 @@
 import React from 'react'
+import SelectField from 'material-ui/SelectField'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import MenuItem from 'material-ui/MenuItem'
 
 export default class AddUserArea extends React.Component{
   constructor() {
     super()
+    this.state= {
+      username: '',
+      password: '',
+      type: 'student'
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleTypeChange = this.handleTypeChange.bind(this)
   }
   handleSubmit(event) {
-    let username = this.usernameInput.value,
-        password = this.passwordInput.value,
-        type = this.typeInput.value,
+    let username = this.usernameInput.getValue(),
+        password = this.passwordInput.getValue(),
+        type = this.state.type,
         token = localStorage.getItem('token')
+
+    console.log(`${username} ${password} ${type}`)
 
     event.preventDefault()
 
@@ -17,44 +30,61 @@ export default class AddUserArea extends React.Component{
       this.props.addUser({username, password, type, token})
     }
 
-    this.usernameInput.value = ''
-    this.passwordInput.value = ''
-    this.typeInput.value = 'student'
+    this.setState({type: 'student'})
+    this.usernameInput.input.value = ''
+    this.passwordInput.input.value = ''
   }
+  handleTypeChange(event, index, value) {
+    this.setState({type: value})
+  };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          <input
-            type='text'
-            name='username'
-            ref={(input) => this.usernameInput = input}
-            placeholder='用户名'
-            required
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            name='password'
-            ref={(input) => this.passwordInput = input}
-            placeholder='密码'
-            required
-          />
-        </div>
-        <div>
-          <select
-            name='type'
-            defaultValue='student'
-            ref={(input) => this.typeInput = input}
-          >
-            <option value='student'>学生</option>
-            <option value='ta'>助理</option>
-            <option value='teacher'>老师</option>
-          </select>
-        </div>
-        <button type='submit'>添加</button>
-      </form>
+      <Card
+        style={{
+          width: '38%',
+          maxWidth: '500px',
+          minWidth: '300px',
+          marginTop: '40px',
+          textAlign: 'center'
+        }}
+      >
+        <CardTitle title='Add User'  />
+        <CardText>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              hintText='Username Field'
+              floatingLabelText='Username'
+              ref={(input) => this.usernameInput = input}
+              required
+            /><br />
+            <TextField
+              hintText='password Field'
+              floatingLabelText='password'
+              type='password'
+              ref={(input) => this.passwordInput = input}
+              required
+            /><br />
+            <SelectField
+              value={this.state.type}
+              onChange={this.handleTypeChange}
+              ref={(input) => this.typeInput = input}
+            >
+              <MenuItem value='student' primaryText="Student" />
+              <MenuItem value='ta' primaryText="Ta" />
+              <MenuItem value='teacher' primaryText="Teacher" />
+            </SelectField>
+            <br />
+            <RaisedButton
+              label='Add'
+              primary={true}
+              type='submit'
+              style={{
+                margin: '18px'
+              }}
+            />
+          </form>
+        </CardText>
+      </Card>
     )
   }
 }

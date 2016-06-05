@@ -10,7 +10,13 @@ export default class UserManagement extends React.Component{
   }
   render() {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          marginTop: '40px'
+        }}
+      >
         <AddUserArea addUser={this.props.addUser}/>
         <UserList
           getUsers={this.props.getUsers}
