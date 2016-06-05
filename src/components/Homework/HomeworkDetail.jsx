@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
 
 export default class HomeworkDetail extends React.Component {
   componentDidMount() {
@@ -17,12 +17,21 @@ export default class HomeworkDetail extends React.Component {
 
   render() {
     return (
-      <div>
-          <div>{`assignment: ${this.props.assignment}`}</div>
-          <div>{`author: ${this.props.author}`}</div>
-          <div>{`title: ${this.props.title}`}</div>
-          <div>{`content: ${this.props.content}`}</div>
-      </div>
+      <Card
+        style={{
+          maxWidth: '400px',
+          margin: 'auto',
+          minHeight: '350px',
+          marginTop: '40px',
+          marginBottom: '40px',
+          textAlign: 'center'
+        }}
+      >
+        <CardTitle title={this.props.title} subtitle={this.props.author}/>
+        <CardText>
+          {this.props.content}
+        </CardText>
+      </Card>
     )
   }
 

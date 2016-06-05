@@ -22,7 +22,7 @@ export default class Publish extends React.Component{
     }
 
     this.titleInput.input.value = ''
-    this.contentInput..getInputNode().value = ''
+    this.contentInput.getInputNode().value = ''
 
     this.props.replace('/assignment-list')
   }
@@ -33,6 +33,7 @@ export default class Publish extends React.Component{
           maxWidth: '400px',
           margin: 'auto',
           marginTop: '40px',
+          marginBottom: '40px',
           textAlign: 'center'
         }}
       >

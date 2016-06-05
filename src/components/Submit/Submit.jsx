@@ -36,6 +36,7 @@ class Submit extends React.Component{
           maxWidth: '400px',
           margin: 'auto',
           marginTop: '40px',
+          marginBottom: '40px',
           textAlign: 'center'
         }}
       >
