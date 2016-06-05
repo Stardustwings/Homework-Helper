@@ -183,7 +183,19 @@ app.use(logger())
 app.use(serve('./dist'))
 app.use(bodyParser())
 
-app.use(jwt({ secret: secret }).unless({ path: [/^\/api\/login/] }))
+// app.use(jwt({ secret: secret }).unless({ path: [/^\/api\/login/] }))
+app.use(jwt({ secret: secret }).unless(function(a) {
+  let url = this.url
+
+  console.log(`path: ${url}`)
+
+  if (url.startsWith('/api') && (!url.startsWith('/api/login'))) {
+    return false
+  } else {
+    return true
+  }
+}))
+
 app.use(function * (next){
   this.state.secret = secret
   yield next

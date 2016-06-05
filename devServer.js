@@ -6,7 +6,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   historyApiFallback: {
-    index: '/static/index.html'
+    index: '/index.html'
   },
   proxy: {
     '/api/*': 'http://localhost:8000'

@@ -50,7 +50,11 @@ export default class AssignmentDetail extends React.Component {
           }}
         >
           <CardTitle title={this.props.title} subtitle={`${this.props.publisher} - ${this.props.date}`}/>
-          <CardText>
+          <CardText
+            style={{
+              whiteSpace: 'pre'
+            }}
+          >
             {this.props.content}
           </CardText>
         </Card>
