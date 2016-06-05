@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router'
-import styles from './header.css'
 import AppBar from 'material-ui/AppBar'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
@@ -32,7 +31,7 @@ export default class Header extends React.Component{
   }
   goTo(url) {
     return () => {
-      this.props.replace(url)
+      this.props.push(url)
       this.handleToggle()
     }
   }

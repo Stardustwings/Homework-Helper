@@ -4,7 +4,8 @@ import {getUsersRequest, addUserRequest} from './../actions/user'
 
 const mapStateToProps = (state) => {
   return {
-    users: state.users // [1, 2, 3, 4, 5, 6, 7, 8].map((a) => ({username: a, type: a}))
+    users: state.users
+    // users: [1, 2, 3, 4, 5, 6, 7, 8].map((a) => ({username: a, type: a}))
   }
 }
 

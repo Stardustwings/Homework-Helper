@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       localStorage.removeItem('token')
       dispatch(logoutSuccess())
     },
-    replace: (url) => dispatch(routerActions.replace(url))
+    push: (url) => dispatch(routerActions.push(url))
   }
 }
 
