@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { routerActions } from 'react-router-redux'
 import Submit from './../components/Submit/Submit'
 import {addHomeworkRequest} from './../actions/homework'
 
@@ -8,17 +9,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    addHomework: ({assignment, author, title, content, token}) => {
-      dispatch(addHomeworkRequest({assignment, author, title, content, token}))
-    }
-  }
-}
-
 const SubmitContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  {addHomework: addHomeworkRequest, push: routerActions.push}
 )(Submit)
 
 export default SubmitContainer

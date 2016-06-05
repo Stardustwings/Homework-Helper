@@ -1,7 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
-export default class Submit extends React.Component{
+class Submit extends React.Component{
   constructor() {
     super()
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -9,9 +12,11 @@ export default class Submit extends React.Component{
   handleSubmit(event) {
     let assignment = this.props.params.id,
         author = this.props.user.username,
-        title = this.titleInput.value,
-        content = this.contentInput.value,
+        title = this.titleInput.getValue(),
+        content = this.contentInput.getValue(),
         token = localStorage.getItem('token')
+
+    // console.log(`${assignment} ${author} ${title} ${content} `)
 
     event.preventDefault()
 
@@ -19,34 +24,52 @@ export default class Submit extends React.Component{
       this.props.addHomework({assignment, author, title, content, token})
     }
 
-    this.titleInput.value = ''
-    this.contentInput.value = ''
+    this.titleInput.input.value = ''
+    this.contentInput.getInputNode().value = ''
+
+    this.props.push(`/assignment-detail/${assignment}`)
   }
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type='text'
-              name='title'
+      <Card
+        style={{
+          maxWidth: '400px',
+          margin: 'auto',
+          marginTop: '40px',
+          textAlign: 'center'
+        }}
+      >
+        <CardTitle title='Submit Homework' subtitle={`To ${this.props.params.id}`}/>
+        <CardText>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              hintText='Title Field'
+              floatingLabelText='Title'
               ref={(input) => this.titleInput = input}
-              placeholder='标题'
               required
-            />
-          </div>
-          <div>
-            <textarea
-              type='text'
-              name='content'
+            /><br />
+            <TextField
+              hintText='Content Field'
+              floatingLabelText='Content'
+              multiLine={true}
+              rows={3}
               ref={(input) => this.contentInput = input}
-              placeholder='具体要求'
               required
+              style={{
+                textAlign: 'left'
+              }}
+            /><br />
+            <RaisedButton
+              label='Submit'
+              primary={true}
+              type='submit'
+              style={{
+                margin: '18px'
+              }}
             />
-          </div>
-          <button type='submit'>发布</button>
-        </form>
-      </div>
+          </form>
+        </CardText>
+      </Card>
     )
   }
 }

@@ -54,7 +54,13 @@ export default class Header extends React.Component{
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-          <MenuItem leftIcon={<Person />}>
+          <MenuItem
+            disabled={true}
+            leftIcon={<Person />}
+            style={{
+              color: 'black'
+            }}
+          >
             {this.props.user.username}
           </MenuItem>
           <Divider />

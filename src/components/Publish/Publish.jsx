@@ -22,7 +22,7 @@ export default class Publish extends React.Component{
     }
 
     this.titleInput.input.value = ''
-    this.contentInput.input.value = ''
+    this.contentInput..getInputNode().value = ''
 
     this.props.replace('/assignment-list')
   }
