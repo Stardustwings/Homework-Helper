@@ -1,3 +1,7 @@
+## Homework Helper
+
+Homework for the course of system analyse and design.
+
 ## Build
 
 1. Run `webpack` to bundle the files.
